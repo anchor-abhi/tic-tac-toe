@@ -1,5 +1,4 @@
 import React from "react";
-import Cross from "./Cross";
 
 const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
   let [i, j] = [pos[0], pos[1]];
@@ -9,6 +8,9 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
     height: "100px",
     textAlign: "center",
     border: "2px solid",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   };
   const handleClick = (e) => {
     if (grid[i][j] != 0 || winner != 0) return;
@@ -17,9 +19,15 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
 
     grid[i][j] = player;
     setGrid([[...grid[0]], [...grid[1]], [...grid[2]]]);
+    let cross = "https://cdn-icons-png.flaticon.com/512/1828/1828774.png";
+    let circle = "https://cdn-icons-png.flaticon.com/512/808/808569.png";
 
-    elem.style.backgroundColor = player == 1 ? "#222b7a" : "#03fc5e";
+    let image = document.createElement("img");
+    image.src = player == 1 ? cross : circle;
+    image.className = "crossImg";
+    elem.append(image);
 
+    // elem.style.backgroundColor = player == 1 ? "#222b7a" : "#03fc5e";
     setPlayer(player == 1 ? 2 : 1);
   };
   return (
