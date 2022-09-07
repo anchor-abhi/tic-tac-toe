@@ -1,8 +1,7 @@
 import React from "react";
 import Cross from "./Cross";
 
-
-const Cell = ({ pos, grid, setGrid, player, setPlayer, winner}) => {
+const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
   let [i, j] = [pos[0], pos[1]];
 
   let style = {
@@ -12,11 +11,9 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer, winner}) => {
     border: "2px solid",
   };
   const handleClick = (e) => {
-
-    if (grid[i][j]!= 0 || (winner != 0)) return;
+    if (grid[i][j] != 0 || winner != 0) return;
     let id = e.target.id;
     let elem = document.getElementById(id);
-
 
     grid[i][j] = player;
     setGrid([[...grid[0]], [...grid[1]], [...grid[2]]]);
