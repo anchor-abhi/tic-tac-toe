@@ -1,4 +1,6 @@
 import React from "react";
+import Cross from "./Cross";
+import { ReactDOM } from "react";
 
 const Cell = ({ pos, grid, setGrid, player, setPlayer }) => {
   let [i, j] = [pos[0], pos[1]];
@@ -7,13 +9,17 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer }) => {
     width: "34%",
     height: "100px",
     textAlign: "center",
-    border: "1px solid",
+    border: "2px solid",
   };
   const handleClick = (e) => {
-    grid[i][j] = player;
-    setGrid([[...grid[0]], [...grid[1]], [...grid[2]]]);
     let id = e.target.id;
     let elem = document.getElementById(id);
+
+    if (grid[i][j] != 0) return;
+
+    grid[i][j] = player;
+    setGrid([[...grid[0]], [...grid[1]], [...grid[2]]]);
+
     elem.style.backgroundColor = player == 1 ? "#222b7a" : "#03fc5e";
 
     setPlayer(player == 1 ? 2 : 1);

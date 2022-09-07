@@ -13,7 +13,7 @@ const Grid = ({ setWinner, winner }) => {
   const [player, setPlayer] = useState(1);
   return (
     <>
-      <div style={{ margin: "auto", border: "2px solid", width: "50%" }}>
+      <div style={{ margin: "auto", width: "300px" }}>
         {grid.map((el, index) => {
           return (
             <div key={index} style={{ display: "flex" }}>
@@ -33,7 +33,7 @@ const Grid = ({ setWinner, winner }) => {
           );
         })}
       </div>
-      {winner==-1 ? <h2>Match Tie</h2> : ""}
+      {winner == -1 ? <h2>Match Tie</h2> : ""}
       {winner == 0 ? <h2>Turn for player : {player}</h2> : ""}
     </>
   );
