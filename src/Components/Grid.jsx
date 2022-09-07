@@ -25,6 +25,7 @@ const Grid = ({ setWinner, winner }) => {
                     grid={grid}
                     setGrid={setGrid}
                     player={player}
+                    winner={winner}
                     setPlayer={setPlayer}
                   />
                 );
