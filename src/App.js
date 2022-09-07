@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Grid from "./Components/Grid";
+import "./App.css";
 
 function App() {
+  const [winner, setWinner] = useState(0);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tic Tac Toe</h1>
+      <Grid setWinner={setWinner} winner={winner} />
+      {winner == 1 || winner == 2 ? (
+        <h2>Yeahh ! Player {winner} is the winner</h2>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
