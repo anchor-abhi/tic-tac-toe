@@ -1,11 +1,12 @@
 export const findWinner = (matrix) => {
   for (let i = 0; i < 3; i++) {
-    if (matrix[i][0] == matrix[i][1] && matrix[i][1] == matrix[i][2]) {
+    if (matrix[i][0] == matrix[i][1] && matrix[i][1] == matrix[i][2] && matrix[i][0]!=0) {
       return matrix[i][0];
     }
   }
   for (let i = 0; i < 3; i++) {
-    if (matrix[0][i] == matrix[1][i] && matrix[1][i] == matrix[2][i]) {
+    if (matrix[0][i] == matrix[1][i] && matrix[1][i] == matrix[2][i] && matrix[0][i]!=0) {
+      console.log("adasd", matrix)
       return matrix[0][i];
     }
   }

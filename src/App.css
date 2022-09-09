@@ -9,3 +9,8 @@
 .crossImg{
   width:50%
 }
+.resetBtn:hover{
+  color:rgb(65, 61, 61);
+  cursor:pointer;
+  color:black;
+}

@@ -1,16 +1,32 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import Cell from "./Cell";
 import { findWinner } from "../utils/ticTacToeLogic";
 
 const Grid = ({ setWinner, winner }) => {
+  const [reset, setReset] = useState(false);
   const [grid, setGrid] = useState([
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
   ]);
-  let win = findWinner(grid);
-  setWinner(win);
+  useEffect(() => {
+    let win = findWinner(grid);
+    setWinner(win);
+  }, [grid]);
   const [player, setPlayer] = useState(1);
+
+  const handleReset = () => {
+    setReset(true);
+    setGrid([
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]);
+    setPlayer(1);
+  };
+  const cancelReset = () => {
+    setReset(false);
+  };
   return (
     <>
       <div style={{ margin: "auto", width: "300px" }}>
@@ -20,6 +36,8 @@ const Grid = ({ setWinner, winner }) => {
               {[0, 1, 2].map((el) => {
                 return (
                   <Cell
+                    setReset={cancelReset}
+                    reset={reset}
                     key={el}
                     pos={[index, el]}
                     grid={grid}
@@ -34,6 +52,17 @@ const Grid = ({ setWinner, winner }) => {
           );
         })}
       </div>
+      <button
+        className="resetBtn"
+        style={{
+          marginTop: "10px",
+          padding: "7px",
+          transitionDelay: "0.4sec",
+        }}
+        onClick={handleReset}
+      >
+        Restart
+      </button>
       {winner == -1 ? <h2>Match Tie</h2> : ""}
       {winner == 0 ? <h2>Turn for player : {player}</h2> : ""}
     </>

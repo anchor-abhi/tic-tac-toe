@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
+const Cell = ({
+  setReset,
+  reset,
+  pos,
+  grid,
+  setGrid,
+  player,
+  setPlayer,
+  winner,
+}) => {
   let [i, j] = [pos[0], pos[1]];
+  const [imgSrc, setImg] = useState(null);
 
   let style = {
     width: "34%",
@@ -12,22 +22,21 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
     alignItems: "center",
     justifyContent: "center",
   };
+  useEffect(() => {
+    if (reset) {
+      setImg(null);
+      setReset();
+    }
+  }, [reset]);
   const handleClick = (e) => {
     if (grid[i][j] != 0 || winner != 0) return;
-    let id = e.target.id;
-    let elem = document.getElementById(id);
-
     grid[i][j] = player;
     setGrid([[...grid[0]], [...grid[1]], [...grid[2]]]);
     let cross = "https://cdn-icons-png.flaticon.com/512/1828/1828774.png";
     let circle = "https://cdn-icons-png.flaticon.com/512/808/808569.png";
 
-    let image = document.createElement("img");
-    image.src = player == 1 ? cross : circle;
-    image.className = "crossImg";
-    elem.append(image);
+    setImg(player == 1 ? cross : circle);
 
-    // elem.style.backgroundColor = player == 1 ? "#222b7a" : "#03fc5e";
     setPlayer(player == 1 ? 2 : 1);
   };
   return (
@@ -36,7 +45,9 @@ const Cell = ({ pos, grid, setGrid, player, setPlayer, winner }) => {
       style={style}
       id={[i, j].join("")}
       onClick={handleClick}
-    ></div>
+    >
+      <img src={imgSrc} style={{ width: "50%" }} />
+    </div>
   );
 };
 
